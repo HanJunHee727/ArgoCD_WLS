@@ -41,10 +41,6 @@ spec:
         command:
         - java
         args:
-        - -Dweblogic.operator.verbose=true
-        - -Dweblogic.operator.namespace=jhhan
-        - -Dweblogic.operator.serviceaccount=weblogic-operator-sa
-        - -Dweblogic.operator.externalRestEnabled=false
         - -jar
         - /operator/weblogic-kubernetes-operator.jar
         volumeMounts:
