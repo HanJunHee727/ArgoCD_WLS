@@ -48,8 +48,7 @@ spec:
         - containerPort: 8443
         volumeMounts:
         - name: tuning-config
-          mountPath: /deployment/operatorTuning.yaml
-          subPath: operatorTuning.yaml
+          mountPath: /deployment
       volumes:
       - name: tuning-config
         configMap:
