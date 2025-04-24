@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: weblogic-operator
-  namespace: jhhan  # ✅ Operator도 jhhan에 설치
+  namespace: jhhan  # Operator도 jhhan에 설치
 spec:
   replicas: 1
   selector:
@@ -23,7 +23,7 @@ spec:
         - containerPort: 8443
         args:
           - "-Dweblogic.operator.verbose=true"
-          - "-Dweblogic.operator.namespace=jhhan"  # ✅ Operator가 jhhan을 감시
+          - "-Dweblogic.operator.namespace=jhhan"  # Operator가 jhhan을 감시
           - "-Dweblogic.operator.serviceaccount=weblogic-operator-sa"
           - "-Dweblogic.operator.externalRestEnabled=false"
 ---
@@ -31,4 +31,4 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: weblogic-operator-sa
-  namespace: jhhan  # ✅ 동일하게 jhhan에 생성
+  namespace: jhhan  # 동일하게 jhhan에 생성
