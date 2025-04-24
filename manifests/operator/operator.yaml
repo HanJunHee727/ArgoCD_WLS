@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: weblogic-operator
-  namespace: jhhan  # Operator도 jhhan에 설치
+  namespace: jhhan
 spec:
   replicas: 1
   selector:
@@ -18,17 +18,20 @@ spec:
       - name: operator
         image: ghcr.io/oracle/weblogic-kubernetes-operator:3.4.4
         imagePullPolicy: IfNotPresent
+        command: ["java"]
+        args:
+          - "-Dweblogic.operator.verbose=true"
+          - "-Dweblogic.operator.namespace=jhhan"
+          - "-Dweblogic.operator.serviceaccount=weblogic-operator-sa"
+          - "-Dweblogic.operator.externalRestEnabled=false"
+          - "-jar"
+          - "/operator/weblogic-kubernetes-operator.jar"
         ports:
         - containerPort: 8080
         - containerPort: 8443
-        args:
-          - "-Dweblogic.operator.verbose=true"
-          - "-Dweblogic.operator.namespace=jhhan"  # Operator가 jhhan을 감시
-          - "-Dweblogic.operator.serviceaccount=weblogic-operator-sa"
-          - "-Dweblogic.operator.externalRestEnabled=false"
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: weblogic-operator-sa
-  namespace: jhhan  # 동일하게 jhhan에 생성
+  namespace: jhhan
